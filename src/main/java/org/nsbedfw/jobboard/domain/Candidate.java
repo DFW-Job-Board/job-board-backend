@@ -1,38 +1,63 @@
 package org.nsbedfw.jobboard.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 
-import java.util.ArrayList;
+import java.util.List;
 
-@Data
-@NoArgsConstructor
-@Builder
-@AllArgsConstructor
-public class Candidate {
+public final class Candidate {
     @Id
-    private String id;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String industry;
-    private String skillLevel;
-    private ArrayList<String> companies;
+    private final String id;
+    private final String firstName;
+    private final String lastName;
+    private final String email;
+    private final String industry;
+    private final String skillLevel;
+    private final List<String> companies;
 
-    @Override
-    public String toString() {
-        return "Candidate{" +
-                "id='" + id + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", industry='" + industry + '\'' +
-                ", skillLevel='" + skillLevel + '\'' +
-                ", companies=" + companies +
-                '}';
+    public Candidate(
+            String id,
+            String firstName,
+            String lastName,
+            String email,
+            String industry,
+            String skillLevel,
+            List<String> companies
+    ) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.industry = industry;
+        this.skillLevel = skillLevel;
+        this.companies = companies;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getIndustry() {
+        return industry;
+    }
+
+    public String getSkillLevel() {
+        return skillLevel;
+    }
+
+    public List<String> getCompanies() {
+        return companies;
     }
 }
 

@@ -17,13 +17,11 @@ public class CandidateService {
         candidateRepository.save(candidate);
     }
 
-    public List<Candidate> getAllCandidates(){
+    public List<Candidate> getAllCandidates() {
         return candidateRepository.findAll();
     }
 
-
     public void delete(String candidateId) {
-        Candidate candidate = candidateRepository.findById(candidateId).orElse(null);
-        candidateRepository.delete(candidate);
+        candidateRepository.deleteById(candidateId);
     }
 }

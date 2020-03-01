@@ -2,6 +2,7 @@ package org.nsbedfw.jobboard.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 import org.nsbedfw.jobboard.controllers.requests.CandidateRequest;
 import org.nsbedfw.jobboard.domain.Candidate;
 import org.nsbedfw.jobboard.services.CandidateService;
@@ -15,7 +16,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
 import static java.util.Collections.singletonList;
-import static org.assertj.core.internal.bytebuddy.matcher.ElementMatchers.is;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 import static org.nsbedfw.jobboard.testUtilities.DummyData.dummyCandidate;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -35,21 +36,40 @@ class JobBoardControllerTest {
 
     @Test
     void shouldCallCandidateService() throws Exception {
-        CandidateRequest candidateRequest = new CandidateRequest("1234","firstName", "lastName", "email", "industry", "skillLevel");
+        CandidateRequest candidateRequest = new CandidateRequest(
+                "1234",
+                "firstName",
+                "lastName",
+                "email",
+                "industry",
+                "skillLevel"
+        );
+
         this.mockMvc.perform(post("/candidates")
                 .content(objectMapper.writeValueAsString(candidateRequest))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        verify(candidateService, times(1)).addCandidate(candidateRequest.toCandidate());
+        ArgumentCaptor<Candidate> actual = ArgumentCaptor.forClass(Candidate.class);
+        verify(candidateService, times(1)).addCandidate(actual.capture());
+
+        Candidate expected = new Candidate(
+                "1234",
+                "firstName",
+                "lastName",
+                "email",
+                "industry",
+                "skillLevel",
+                null
+        );
+        assertThat(actual.getValue()).isEqualToComparingFieldByField(expected);
     }
 
     @Test
     void shouldCallGetCandidates() throws Exception {
         when(candidateService.getAllCandidates()).thenReturn(singletonList(dummyCandidate()));
 
-
-       mockMvc.perform(get("/candidates")
+        mockMvc.perform(get("/candidates")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].firstName").value("Goodness"))
@@ -65,7 +85,7 @@ class JobBoardControllerTest {
         params.put("candidateId", singletonList("1234"));
 
         mockMvc.perform(delete("/candidates")
-               .params(params)
+                .params(params)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 

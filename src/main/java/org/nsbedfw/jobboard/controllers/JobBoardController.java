@@ -17,19 +17,18 @@ public class JobBoardController {
     @Autowired
     private CandidateService candidateService;
 
-
     @PostMapping(consumes = APPLICATION_JSON_VALUE)
-    public void addCandidate(@RequestBody CandidateRequest candidateRequest){
+    public void addCandidate(@RequestBody CandidateRequest candidateRequest) {
         candidateService.addCandidate(candidateRequest.toCandidate());
     }
 
     @GetMapping(consumes = APPLICATION_JSON_VALUE)
-    public List<Candidate> getCandidates(){
+    public List<Candidate> getCandidates() {
         return candidateService.getAllCandidates();
     }
 
     @DeleteMapping(consumes = APPLICATION_JSON_VALUE)
-    public void deleteCandidate(@RequestParam String candidateId){
+    public void deleteCandidate(@RequestParam String candidateId) {
         candidateService.delete(candidateId);
     }
 

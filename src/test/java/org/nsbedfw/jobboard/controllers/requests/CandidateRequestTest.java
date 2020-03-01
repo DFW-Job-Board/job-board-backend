@@ -9,11 +9,11 @@ class CandidateRequestTest {
 
     @Test
     void shouldTransformToCandidate() {
-        CandidateRequest candidateRequest = new CandidateRequest("id","Goodness", "Daramola", "email@test.com", "Software", "entry");
+        CandidateRequest candidateRequest = new CandidateRequest("id", "Goodness", "Daramola", "email@test.com", "Software", "entry");
         Candidate expected = new Candidate("id", "Goodness", "Daramola", "email@test.com", "Software", "entry", null);
 
         Candidate actualCandidate = candidateRequest.toCandidate();
 
-        assertThat(expected).isEqualTo(actualCandidate);
+        assertThat(expected).isEqualToComparingFieldByField(actualCandidate);
     }
 }
