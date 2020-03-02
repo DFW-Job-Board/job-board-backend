@@ -8,6 +8,8 @@ import org.nsbedfw.jobboard.repositories.CandidateRepository;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -45,7 +47,10 @@ class CandidateServiceTest {
 
     @Test
     void shouldRemoveCandidate() {
-        candidateService.delete("id");
-        verify(repository, times(1)).deleteById("id");
+        UUID uuid = UUID.randomUUID();
+
+        candidateService.delete(uuid.toString());
+
+        verify(repository, times(1)).deleteById(uuid);
     }
 }

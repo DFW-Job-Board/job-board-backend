@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class CandidateService {
@@ -22,6 +23,6 @@ public class CandidateService {
     }
 
     public void delete(String candidateId) {
-        candidateRepository.deleteById(candidateId);
+        candidateRepository.deleteById(UUID.fromString(candidateId));
     }
 }
