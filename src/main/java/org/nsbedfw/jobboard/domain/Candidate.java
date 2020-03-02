@@ -3,10 +3,11 @@ package org.nsbedfw.jobboard.domain;
 import org.springframework.data.annotation.Id;
 
 import java.util.List;
+import java.util.UUID;
 
 public final class Candidate {
     @Id
-    private final String id;
+    private final UUID id;
     private final String firstName;
     private final String lastName;
     private final String email;
@@ -15,7 +16,7 @@ public final class Candidate {
     private final List<String> companies;
 
     public Candidate(
-            String id,
+            UUID id,
             String firstName,
             String lastName,
             String email,
@@ -32,7 +33,7 @@ public final class Candidate {
         this.companies = companies;
     }
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 

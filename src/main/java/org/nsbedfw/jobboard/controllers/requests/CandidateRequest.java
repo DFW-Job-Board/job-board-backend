@@ -2,8 +2,9 @@ package org.nsbedfw.jobboard.controllers.requests;
 
 import org.nsbedfw.jobboard.domain.Candidate;
 
+import java.util.UUID;
+
 public final class CandidateRequest {
-    private final String id;
     private final String firstName;
     private final String lastName;
     private final String email;
@@ -11,23 +12,17 @@ public final class CandidateRequest {
     private final String skillLevel;
 
     public CandidateRequest(
-            String id,
             String firstName,
             String lastName,
             String email,
             String industry,
             String skillLevel
     ) {
-        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.industry = industry;
         this.skillLevel = skillLevel;
-    }
-
-    public String getId() {
-        return id;
     }
 
     public String getFirstName() {
@@ -52,7 +47,7 @@ public final class CandidateRequest {
 
     public Candidate toCandidate() {
         return new Candidate(
-                id,
+                UUID.randomUUID(),
                 firstName,
                 lastName,
                 email,

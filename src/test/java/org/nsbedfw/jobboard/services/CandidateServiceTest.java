@@ -39,7 +39,7 @@ class CandidateServiceTest {
         List<Candidate> allCandidates = candidateService.getAllCandidates();
 
         assertThat(allCandidates)
-                .usingFieldByFieldElementComparator()
+                .usingElementComparatorIgnoringFields("id")
                 .containsExactly(dummyCandidate());
     }
 

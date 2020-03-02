@@ -15,6 +15,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
+import java.util.UUID;
+
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
@@ -37,7 +39,6 @@ class JobBoardControllerTest {
     @Test
     void shouldCallCandidateService() throws Exception {
         CandidateRequest candidateRequest = new CandidateRequest(
-                "1234",
                 "firstName",
                 "lastName",
                 "email",
@@ -54,7 +55,7 @@ class JobBoardControllerTest {
         verify(candidateService, times(1)).addCandidate(actual.capture());
 
         Candidate expected = new Candidate(
-                "1234",
+                UUID.randomUUID(),
                 "firstName",
                 "lastName",
                 "email",
@@ -62,7 +63,7 @@ class JobBoardControllerTest {
                 "skillLevel",
                 null
         );
-        assertThat(actual.getValue()).isEqualToComparingFieldByField(expected);
+        assertThat(actual.getValue()).isEqualToIgnoringGivenFields(expected, "id");
     }
 
     @Test
