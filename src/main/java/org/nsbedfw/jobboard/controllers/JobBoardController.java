@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-
 @RestController
 @RequestMapping("candidates")
 public class JobBoardController {
@@ -17,17 +15,17 @@ public class JobBoardController {
     @Autowired
     private CandidateService candidateService;
 
-    @PostMapping(consumes = APPLICATION_JSON_VALUE)
+    @PostMapping
     public void addCandidate(@RequestBody CandidateRequest candidateRequest) {
         candidateService.addCandidate(candidateRequest.toCandidate());
     }
 
-    @GetMapping(consumes = APPLICATION_JSON_VALUE)
+    @GetMapping
     public List<Candidate> getCandidates() {
         return candidateService.getAllCandidates();
     }
 
-    @DeleteMapping(consumes = APPLICATION_JSON_VALUE)
+    @DeleteMapping
     public void deleteCandidate(@RequestParam String candidateId) {
         candidateService.delete(candidateId);
     }
