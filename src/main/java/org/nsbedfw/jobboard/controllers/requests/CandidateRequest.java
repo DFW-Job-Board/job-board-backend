@@ -1,15 +1,19 @@
 package org.nsbedfw.jobboard.controllers.requests;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.nsbedfw.jobboard.domain.Candidate;
 
 import java.util.UUID;
 
+@Data
+@NoArgsConstructor
 public final class CandidateRequest {
-    private final String firstName;
-    private final String lastName;
-    private final String email;
-    private final String industry;
-    private final String skillLevel;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String industry;
+    private String skillLevel;
 
     public CandidateRequest(
             String firstName,
@@ -23,26 +27,6 @@ public final class CandidateRequest {
         this.email = email;
         this.industry = industry;
         this.skillLevel = skillLevel;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getIndustry() {
-        return industry;
-    }
-
-    public String getSkillLevel() {
-        return skillLevel;
     }
 
     public Candidate toCandidate() {
