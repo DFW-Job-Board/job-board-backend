@@ -8,11 +8,11 @@ import org.nsbedfw.jobboard.repositories.CandidateRepository;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.*;
 import static org.nsbedfw.jobboard.testUtilities.DummyData.dummyCandidate;
 
@@ -52,10 +52,5 @@ class CandidateServiceTest {
         candidateService.delete(uuid.toString());
 
         verify(repository, times(1)).deleteById(uuid);
-    }
-
-    @Test
-    void shouldFail() {
-        fail();
     }
 }
