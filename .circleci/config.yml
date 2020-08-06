@@ -11,13 +11,7 @@ orbs:
     heroku_deploy:
       jobs:
         - build
-        - heroku/deploy-via-git: # Use the pre-configured job, deploy-via-git
-            requires:
-              - build
-            filters:
-              branches:
-                only: master
-
+        - heroku/deploy-via-git
 jobs:
   build:
     docker:
@@ -55,3 +49,9 @@ jobs:
 
       # run tests!
       - run: gradle build
+  heroku/deploy-via-git: # Use the pre-configured job, deploy-via-git
+    requires:
+      - build
+    filters:
+      branches:
+        only: master
