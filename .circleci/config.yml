@@ -16,7 +16,7 @@ orbs:
               - build
             filters:
               branches:
-                only: circleci-project-setup
+                only: master
 
 jobs:
   build:
