@@ -27,7 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @AutoConfigureMockMvc
 @SpringBootTest
-class JobBoardControllerTest {
+class CandidateControllerTest {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Autowired

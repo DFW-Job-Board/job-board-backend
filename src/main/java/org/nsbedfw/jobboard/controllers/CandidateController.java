@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("candidates")
-public class JobBoardController {
+public class CandidateController {
 
     @Autowired
     private CandidateService candidateService;
